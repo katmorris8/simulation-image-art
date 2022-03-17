@@ -10,10 +10,17 @@ function App() {
   const width = newImage.width / scale;
 
   console.log('image dimensions', width, height);
+  const { src } = newImage;
+  const imageStyle = {
+    backgroundImage: `url(${src})`,
+    backgroundSize: `${width}px ${height}px`,
+    width: `${width / 4}px`,
+    height: `${height / 4}px`,
+  }
 
   return (
     <div className="App">
-      <img src={newImage.src} height={height} width={width} alt="" />
+      <div style={imageStyle} />
     </div>
   );
 }
