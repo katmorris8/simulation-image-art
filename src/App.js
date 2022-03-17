@@ -6,7 +6,7 @@ function App() {
   const newImage = new Image();
   newImage.src = image;
   const { src } = newImage;
-  const scale = 4;
+  const scale = 10;
   const width = newImage.width / scale;
   const height = newImage.height / scale;
 
