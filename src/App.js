@@ -13,19 +13,23 @@ function App() {
   const numberOfTilesHigh = Math.floor(height / (width / scale));
   const rowsArray = Array(numberOfTilesHigh).fill(<div />);
 
+  const doubleRowArray = Array(2).fill(<div />);
+
   return (
     <div className="App">
       {rowsArray.map((item, index) => {
-        return (
-          <Row
-            key={`row ${(src, index)}`}
-            src={src}
-            scale={scale}
-            width={width}
-            height={height}
-            rowIndex={index}
-          />
-        );
+        return doubleRowArray.map((item, i) => {
+          return (
+            <Row
+              key={`row ${(src, index, i)}`}
+              src={src}
+              scale={scale}
+              width={width}
+              height={height}
+              rowIndex={index}
+            />
+          );
+        })
       })}
     </div>
   );
