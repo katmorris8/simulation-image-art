@@ -1,36 +1,69 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import image from "./images/test-pic.jpg";
+import imagePath from "./images/test-pic.jpg";
 import Row from "./Row";
 
 function App() {
-  const newImage = new Image();
-  newImage.src = image;
-  const { src } = newImage;
-  const scale = 10;
-  const width = newImage.width / scale;
-  const height = newImage.height / scale;
+  const [imageData, setImageData] = useState();
+  const [imageDimensions, setImageDimensions] = useState({});
 
-  const numberOfTilesHigh = Math.floor(height / (width / scale));
-  const rowsArray = Array(numberOfTilesHigh).fill(<div />);
+  const loadImage = (setImageDimensions, imageUrl) => {
+    const img = new Image();
+    img.src = imageUrl;
+
+    img.onload = () => {
+      setImageDimensions({
+        height: img.height,
+        width: img.width,
+      });
+    };
+    img.onerror = (err) => {
+      console.log("img error");
+      console.error(err);
+    };
+  };
+
+  useEffect(() => {
+    if (!imageDimensions.width) {
+      loadImage(setImageDimensions, imagePath);
+    }
+
+    if (imageDimensions.width) {
+      const scale = 10;
+      const width = imageDimensions.width / scale;
+      const height = imageDimensions.height / scale;
+
+      const numberOfTilesHigh = Math.floor(height / (width / scale));
+      const rowsArray = Array(numberOfTilesHigh).fill(<div />);
+
+      setImageData({
+        scale: scale,
+        width: width,
+        height: height,
+        rowsArray: rowsArray,
+      });
+    }
+  }, [imageDimensions]);
 
   const doubleRowArray = Array(2).fill(<div />);
 
   return (
     <div className="App">
-      {rowsArray.map((item, index) => {
-        return doubleRowArray.map((item, i) => {
-          return (
-            <Row
-              key={`row ${(src, index, i)}`}
-              src={src}
-              scale={scale}
-              width={width}
-              height={height}
-              rowIndex={index}
-            />
-          );
-        })
-      })}
+      {imageData &&
+        imageData.rowsArray.map((item, index) => {
+          return doubleRowArray.map((item, i) => {
+            return (
+              <Row
+                key={`row ${(imagePath, index, i)}`}
+                src={imagePath}
+                scale={imageData.scale}
+                width={imageData.width}
+                height={imageData.height}
+                rowIndex={index}
+              />
+            );
+          });
+        })}
     </div>
   );
 }
