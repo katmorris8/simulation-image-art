@@ -7,6 +7,7 @@ const Tile = ({ src, scale, width, height, tileIndex, rowIndex }) => {
     backgroundPosition: `-${(width / scale) * tileIndex}px -${
       (width / scale) * rowIndex
     }px`,
+    margin: '.5px',
   };
   return <div style={styles} />;
 };

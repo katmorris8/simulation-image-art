@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import imagePath from "./images/test-pic.jpg";
+import MuiSlider from "./MuiSlider";
 import Row from "./Row";
 
 function App() {
@@ -49,21 +50,24 @@ function App() {
 
   return (
     <div className="App">
-      {imageData &&
-        imageData.rowsArray.map((item, index) => {
-          return doubleRowArray.map((item, i) => {
-            return (
-              <Row
-                key={`row ${(imagePath, index, i)}`}
-                src={imagePath}
-                scale={imageData.scale}
-                width={imageData.width}
-                height={imageData.height}
-                rowIndex={index}
-              />
-            );
-          });
-        })}
+      <div className="image-preview">
+        {imageData &&
+          imageData.rowsArray.map((item, index) => {
+            return doubleRowArray.map((item, i) => {
+              return (
+                <Row
+                  key={`row ${(imagePath, index, i)}`}
+                  src={imagePath}
+                  scale={imageData.scale}
+                  width={imageData.width}
+                  height={imageData.height}
+                  rowIndex={index}
+                />
+              );
+            });
+          })}
+      </div>
+      <MuiSlider />
     </div>
   );
 }
