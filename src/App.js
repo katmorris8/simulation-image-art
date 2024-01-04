@@ -7,6 +7,7 @@ import Row from "./Row";
 function App() {
   const [imageData, setImageData] = useState();
   const [imageDimensions, setImageDimensions] = useState({});
+  const [gapSliderValue, SetGapSliderValue] = useState(1);
 
   const loadImage = (setImageDimensions, imageUrl) => {
     const img = new Image();
@@ -48,8 +49,11 @@ function App() {
 
   const doubleRowArray = Array(2).fill(<div />);
 
+  console.log('gapSliderValue', gapSliderValue);
+
   return (
     <div className="App">
+      <MuiSlider name='Tile Gap' gap={gapSliderValue} onChange={(event) => SetGapSliderValue(event.target.value)} />
       <div className="image-preview">
         {imageData &&
           imageData.rowsArray.map((item, index) => {
@@ -62,12 +66,12 @@ function App() {
                   width={imageData.width}
                   height={imageData.height}
                   rowIndex={index}
+                  gap={gapSliderValue}
                 />
               );
             });
           })}
       </div>
-      <MuiSlider />
     </div>
   );
 }

@@ -1,31 +1,18 @@
 import Slider, { SliderThumb, SliderValueLabelProps } from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 const iOSBoxShadow =
   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
-// const marks = [
-//   {
-//     value: 0,
-//   },
-//   {
-//     value: 20,
-//   },
-//   {
-//     value: 37,
-//   },
-//   {
-//     value: 100,
-//   },
-// ];
-
-const IOSSlider = styled(Slider)(({ theme }) => ({
+const StyledSlider = styled(Slider)(({ theme }) => ({
   color: theme.palette.mode === 'dark' ? '#3880ff' : '#3880ff',
   height: 2,
   padding: '15px',
+  width: '50%',
   '& .MuiSlider-thumb': {
-    height: 28,
-    width: 28,
+    height: 18,
+    width: 18,
     backgroundColor: '#fff',
     boxShadow: iOSBoxShadow,
     '&:focus, &:hover, &.Mui-active': {
@@ -69,13 +56,18 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedSlider() {
+export default function CustomizedSlider({name, gap, onChange}) {
   return (
-    <IOSSlider
-      aria-label="ios slider"
-      defaultValue={60}
-      // marks={marks}
-      valueLabelDisplay="on"
-    />
+    <div styles={{ display: 'flex', flexDirction: 'column', width: '100%', }}>
+      <Typography>{name}</Typography>
+      <StyledSlider
+        aria-label="ios slider"
+        defaultValue={gap}
+        marks
+        // valueLabelDisplay="on"
+        onChange={onChange}
+        max={20}
+      />
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-const Tile = ({ src, scale, width, height, tileIndex, rowIndex }) => {
+const Tile = ({ src, scale, width, height, tileIndex, rowIndex, gap, }) => {
   const styles = {
     backgroundImage: `url(${src})`,
     backgroundSize: `${width}px ${height}px`,
@@ -7,7 +7,7 @@ const Tile = ({ src, scale, width, height, tileIndex, rowIndex }) => {
     backgroundPosition: `-${(width / scale) * tileIndex}px -${
       (width / scale) * rowIndex
     }px`,
-    margin: '.5px',
+    margin: `${gap/2}px`,
   };
   return <div style={styles} />;
 };

@@ -1,7 +1,7 @@
 import Tile from "../Tile";
 import "./style.css";
 
-const Row = ({ src, scale, width, height, rowIndex }) => {
+const Row = ({ src, scale, width, height, rowIndex, gap, }) => {
   const tilesArray = Array(scale).fill(<div />);
   const doubleTilesArray = Array(2).fill(<div />);
   return (
@@ -17,6 +17,7 @@ const Row = ({ src, scale, width, height, rowIndex }) => {
               height={height}
               tileIndex={index}
               rowIndex={rowIndex}
+              gap={gap}
             />
           )
         })
